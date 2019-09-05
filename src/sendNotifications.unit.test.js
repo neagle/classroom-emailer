@@ -60,7 +60,5 @@ it("should send a message to class parents saying that no one has signed up", ()
   ];
 
   sendNotifications(notifications);
-  expect(sendEmail).toHaveBeenCalledTimes(
-    process.env.ROOM_PARENTS.split(",").length
-  );
+  expect(sendEmail).toHaveBeenCalledTimes(1);
 });
