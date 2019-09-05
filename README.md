@@ -35,7 +35,7 @@ npm install
 You can invoke the function locally using the event object in `debug-send-event.js`:
 
 ```sh
-# runs the current index.js
+# runs the current src/index.js
 npm run invoke
 
 # runs the current built file in build/index.js
