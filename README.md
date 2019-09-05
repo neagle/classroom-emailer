@@ -2,7 +2,7 @@
 
 The Gingko classroom at Lee Montessori has three weekly services provided by student families. This project parses the sign-up sheet in `tsv` form and sends reminder emails to the families who have signed up a few days beforehand.
 
-## Usage
+## Configuration
 
 To run the function, you need a `.env` file with
 
@@ -15,6 +15,12 @@ You can use the `sample.env` file, included in the repo, as reference.
 ```sh
 cp sample.env .env
 ```
+
+Sending these emails to actual people requires a `src/familyEmails.js` file, which is not included in this repo for privacy reasons. Consult `src/sample.familyEmails.js` for reference on how to format it.
+
+Scheduling the script to actually run is done through the AWS console using CloudWatch, not through any configuration present in this project.
+
+## Usage
 
 The function is an AWS lambda, which gets uploaded and independently scheduled via CloudWatch to run daily at a certain time (8 AM, currently). It is controlled via a few different flags in the event object it receives:
 
@@ -49,9 +55,3 @@ To actually upload these changes to AWS, make sure you have the `aws-cli` set up
 ```sh
 npm run upload
 ```
-
-## Configuration
-
-Sending these emails to actual people requires a `src/familyEmails.js` file, which is not included in this repo for privacy reasons. Consult `src/sample.familyEmails.js` for reference on how to format it.
-
-Scheduling the script to actually run is done through the AWS console using CloudWatch, not through any configuration present in this project.
