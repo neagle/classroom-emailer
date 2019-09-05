@@ -7,8 +7,10 @@ const emailTemplates = require("./emailTemplates");
 const sendEmail = require("./sendEmail");
 jest.mock("./sendEmail");
 
-const familyEmails = require("./familyEmails");
-jest.mock("./familyEmails.js");
+const mockedFamilyEmails = require("./__mocks__/familyEmails");
+jest.mock("./familyEmails", () => require("./__mocks__/familyEmails"), {
+  virtual: true
+});
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -16,7 +18,7 @@ afterEach(() => {
 
 it("should send a notification", () => {
   // const sendEmail = jest.fn();
-  const family = familyEmails[1];
+  const family = mockedFamilyEmails[1];
   const service = emailTemplates[2];
 
   const serviceDate = new Date("2019-09-06T04:00:00.000Z");
