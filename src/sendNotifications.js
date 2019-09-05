@@ -30,7 +30,7 @@ module.exports = notifications => {
       });
       notification.subject = message[0].subject;
       notification.text =
-        message.length && message[0].text(notification.serviceDate).trim();
+        message.length && message[0].text(notification.serviceDate);
     }
   });
 

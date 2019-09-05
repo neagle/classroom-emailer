@@ -2,9 +2,13 @@ require("dotenv").config();
 
 const util = require("util");
 const sendNotifications = require("./sendNotifications");
+const emailTemplates = require("./emailTemplates");
 
 const sendEmail = require("./sendEmail");
 jest.mock("./sendEmail");
+
+const familyEmails = require("./familyEmails");
+jest.mock("./familyEmails.js");
 
 afterEach(() => {
   jest.clearAllMocks();
@@ -12,17 +16,27 @@ afterEach(() => {
 
 it("should send a notification", () => {
   // const sendEmail = jest.fn();
+  const family = familyEmails[1];
+  const service = emailTemplates[2];
+
+  const serviceDate = new Date("2019-09-06T04:00:00.000Z");
+
   const notifications = [
     {
-      serviceDate: new Date("2019-09-06T04:00:00.000Z"),
+      serviceDate: serviceDate,
       service: "Monday Drop Off Bouquet of Flowers and snacks",
-      family: "Eagle family"
+      family: `${family.name} family`
     }
   ];
 
   sendNotifications(notifications);
 
   expect(sendEmail).toBeCalledTimes(1);
+  expect(sendEmail).toHaveBeenCalledWith(
+    family.emails.join(", "),
+    service.subject,
+    service.text(serviceDate)
+  );
 });
 
 it("should send multiple notifications", () => {

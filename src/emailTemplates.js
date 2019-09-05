@@ -17,41 +17,47 @@ module.exports = [
     service: /^Friday/i,
     subject: "🧺 Laundry Reminder",
     text: serviceDate =>
-      `
+      (
+        `
 Just sending a reminder that you have signed up for laundry duty this coming ${format(
-        serviceDate,
-        dateFormat
-      )}. 
+          serviceDate,
+          dateFormat
+        )}. 
 
 Thank you! Doing the class’s laundry is a huge help.
     ` + footer
+      ).trim()
   },
   {
     // Wednesday home-made snack
     service: /^Wednesday/i,
     subject: "🍌 Homemade Snack Reminder",
     text: serviceDate =>
-      `
+      (
+        `
 Just a friendly reminder to send in a nice homemade snack on ${format(
-        serviceDate,
-        dateFormat
-      )}. 
+          serviceDate,
+          dateFormat
+        )}. 
 
 Thank you! We really appreciate your help.
     ` + footer
+      ).trim()
   },
   {
     // Monday drop off boquet of flowers and snacks
     service: /^Monday/i,
     subject: "🌷🍌 Flowers and Snacks Reminder",
     text: serviceDate =>
-      `
+      (
+        `
 Just sending a reminder that you have signed up to bring in flowers and snacks this coming ${format(
-        serviceDate,
-        dateFormat
-      )}. 
+          serviceDate,
+          dateFormat
+        )}. 
 
 Thank you! We couldn’t do it without you.
     ` + footer
+      ).trim()
   }
 ];
