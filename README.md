@@ -4,6 +4,18 @@ The Gingko classroom at Lee Montessori has three weekly services provided by stu
 
 ## Usage
 
+To run the function, you need a `.env` file with
+
+1. Your gmail username and an [app-specific password](https://myaccount.google.com/apppasswords)
+2. The unique key for your Google spreadsheet (check your spreadsheet's URL: it's the hash after `/d/`)
+3. A comma-separated list of the room parents' email addresses. Not the _family_ email addresses, but the parents who are managing classroom volunteer stuff for the year.
+
+You can use the `sample.env` file, included in the repo, as reference.
+
+```sh
+cp sample.env .env
+```
+
 The function is an AWS lambda, which gets uploaded and independently scheduled via CloudWatch to run daily at a certain time (8 AM, currently). It is controlled via a few different flags in the event object it receives:
 
 <!-- prettier-ignore-start -->
