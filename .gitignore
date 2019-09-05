@@ -1,0 +1,6 @@
+.env
+src/familyEmails.js
+build
+.DS_store
+*.zip
+node_modules
