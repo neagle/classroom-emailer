@@ -1,20 +1,14 @@
-const util = require("util");
-const { differenceInDays } = require("date-fns");
-const { startOfDay } = require("date-fns");
-const {
-  convertToLocalTime,
-  convertToTimeZone,
-  formatToTimeZone,
-  parseFromTimeZone
-} = require("date-fns-timezone");
+const { differenceInDays, startOfDay } = require("date-fns");
+const { convertToTimeZone } = require("date-fns-timezone");
 
 module.exports = services => {
   const notifications = [];
-  const notifyThisManyDaysBefore = [1, 0];
 
   const today = convertToTimeZone(process.env.date || new Date(), {
     timeZone: "America/New_York"
   });
+
+  console.log("today", today);
 
   process.env.debug && console.log("TODAY", today);
 
@@ -29,6 +23,7 @@ module.exports = services => {
       const serviceDate = new Date(
         `${serviceMonth}/${serviceDay}/${serviceYear}`
       );
+      console.log("serviceDate", serviceDate);
 
       const daysLeft = differenceInDays(serviceDate, startOfDay(today));
 

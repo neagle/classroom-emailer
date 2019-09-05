@@ -32,6 +32,8 @@ it("send notifications for Wednesday snack two days before", () => {
 
   const notifications = getNotifications(services);
 
+  console.log("notifications", notifications);
+
   expect(notifications.length).toBe(1);
   expect(notifications[0].family).toBe("Eagle family");
 });
