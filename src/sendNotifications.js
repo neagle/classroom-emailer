@@ -17,10 +17,8 @@ module.exports = notifications => {
 
     // If there are no recipients, no one has signed up: we need to send the message to the room parents
     if (!notification.recipient.length) {
-      const { ROOM_PARENTS } = process.env;
-      notification.recipient = ROOM_PARENTS.length
-        ? ROOM_PARENTS.split(",")
-        : "";
+      const { ROOM_PARENTS = "" } = process.env;
+      notification.recipient = ROOM_PARENTS.split(",");
       notification.text = `Right now, no one has signed up for ${
         notification.service
       } on ${format(
