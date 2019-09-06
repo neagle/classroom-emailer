@@ -1,31 +1,51 @@
 const { differenceInDays, startOfDay } = require("date-fns");
 const { convertToTimeZone } = require("date-fns-timezone");
 
+const TIMEZONE = "America/New_York";
+
 module.exports = services => {
   const notifications = [];
 
-  const today = convertToTimeZone(process.env.date || new Date(), {
-    timeZone: "America/New_York"
-  });
-
-  console.log("today", today);
+  const today = process.env.date ? new Date(process.env.date) : new Date();
+  console.log("~~TODAY", today);
 
   process.env.debug && console.log("TODAY", today);
 
   services.forEach(({ service, dates }) => {
     dates.forEach(([monthAndDay, family]) => {
-      const [serviceMonth, serviceDay] = monthAndDay.split("/");
+      const [serviceMonth, serviceDay] = monthAndDay.split("/").map(Number);
+
+      // Get the non-zero-indexed month... why would anyone ever zero index the months?
+      const currentMonth = today.getMonth() + 1;
+      const currentDay = today.getDate();
+
+      console.log("currentMonth", currentMonth);
+
+      console.log("serviceMonth", serviceMonth);
+      console.log("currentDay, serviceDay", currentDay, serviceDay);
+
+      console.log("currentMonth < serviceMonth", currentMonth < serviceMonth);
+      console.log(
+        "currentMonth === serviceMonth",
+        currentMonth === serviceMonth
+      );
+      console.log("currentDay <= serviceDay", currentDay <= serviceDay);
+
       const serviceYear =
-        today.getMonth() < serviceMonth
+        currentMonth < serviceMonth ||
+        (currentMonth === serviceMonth && currentDay <= serviceDay)
           ? today.getFullYear()
           : today.getFullYear() + 1;
 
-      const serviceDate = new Date(
-        `${serviceMonth}/${serviceDay}/${serviceYear}`
-      );
-      console.log("serviceDate", serviceDate);
+      const serviceDate = new Date(today);
+      serviceDate.setYear(serviceYear);
+      // Month wants to be zero indexed. God knows why.
+      serviceDate.setMonth(serviceMonth - 1);
+      serviceDate.setDate(serviceDay);
+      console.log("~~serviceDate", serviceDate);
 
-      const daysLeft = differenceInDays(serviceDate, startOfDay(today));
+      const daysLeft = differenceInDays(serviceDate, today);
+      console.log("daysLeft", daysLeft);
 
       if (startOfDay(serviceDate) >= today) {
         if (
