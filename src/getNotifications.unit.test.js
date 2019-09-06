@@ -2,7 +2,6 @@ const getNotifications = require("./getNotifications");
 
 it("send notifications for Friday laundry pick-up two days before", () => {
   process.env.date = new Date("9/4/2019");
-  // process.env.date = new Date("2019-09-04T09:09:16.230Z");
 
   const services = [
     {

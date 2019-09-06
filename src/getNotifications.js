@@ -1,13 +1,10 @@
 const { differenceInDays, startOfDay } = require("date-fns");
 const { convertToTimeZone } = require("date-fns-timezone");
 
-const TIMEZONE = "America/New_York";
-
 module.exports = services => {
   const notifications = [];
 
   const today = process.env.date ? new Date(process.env.date) : new Date();
-  console.log("~~TODAY", today);
 
   process.env.debug && console.log("TODAY", today);
 
@@ -18,18 +15,6 @@ module.exports = services => {
       // Get the non-zero-indexed month... why would anyone ever zero index the months?
       const currentMonth = today.getMonth() + 1;
       const currentDay = today.getDate();
-
-      console.log("currentMonth", currentMonth);
-
-      console.log("serviceMonth", serviceMonth);
-      console.log("currentDay, serviceDay", currentDay, serviceDay);
-
-      console.log("currentMonth < serviceMonth", currentMonth < serviceMonth);
-      console.log(
-        "currentMonth === serviceMonth",
-        currentMonth === serviceMonth
-      );
-      console.log("currentDay <= serviceDay", currentDay <= serviceDay);
 
       const serviceYear =
         currentMonth < serviceMonth ||
@@ -42,10 +27,8 @@ module.exports = services => {
       // Month wants to be zero indexed. God knows why.
       serviceDate.setMonth(serviceMonth - 1);
       serviceDate.setDate(serviceDay);
-      console.log("~~serviceDate", serviceDate);
 
       const daysLeft = differenceInDays(serviceDate, today);
-      console.log("daysLeft", daysLeft);
 
       if (startOfDay(serviceDate) >= today) {
         if (
