@@ -1,8 +1,7 @@
-require("dotenv").config();
+import "dotenv/config";
 
-const util = require("util");
-const sendNotifications = require("./sendNotifications");
-const emailTemplates = require("./emailTemplates");
+import sendNotifications from "./sendNotifications";
+import emailTemplates from "./emailTemplates";
 
 const sendEmail = require("./sendEmail");
 jest.mock("./sendEmail");

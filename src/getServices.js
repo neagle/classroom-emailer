@@ -1,4 +1,4 @@
-module.exports = tsv => {
+const getServices = tsv => {
   const arr = tsv.split("\n").map(row => row.split("\t"));
   const datesArr = arr.splice(3);
   const services = arr[2]
@@ -26,3 +26,5 @@ module.exports = tsv => {
 
   return services;
 };
+
+export default getServices;

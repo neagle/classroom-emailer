@@ -1,4 +1,4 @@
-const getNotifications = require("./getNotifications");
+import getNotifications from "./getNotifications";
 
 it("send notifications for Friday laundry pick-up two days before", () => {
   process.env.date = new Date("9/4/2019");
@@ -30,8 +30,6 @@ it("send notifications for Wednesday snack two days before", () => {
   ];
 
   const notifications = getNotifications(services);
-
-  console.log("notifications", notifications);
 
   expect(notifications.length).toBe(1);
   expect(notifications[0].family).toBe("Eagle family");

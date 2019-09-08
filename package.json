@@ -4,12 +4,13 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build": "webpack && zip -j function.zip .env build/index.js",
+    "build": "webpack --env=prod && zip -j function.zip .env build/index.js",
     "upload": "aws lambda --profile gokibitz update-function-code --function-name gingko-emailer --zip-file fileb://function.zip",
     "test": "jest",
     "test-watch": "jest --watchAll",
-    "invoke": "lambda-local -l src/index.js -h handler -e debug-send-event.js",
-    "invoke-built": "lambda-local -l build/index.js -h handler -e debug-send-event.js"
+    "invoke": "lambda-local -l build/index.js -h handler -e debug-send-event.js",
+    "watch": "webpack --env=dev --watch",
+    "start": "webpack --env=dev"
   },
   "author": "Nate Eagle <n.eagle@gmail.com>",
   "license": "ISC",
@@ -25,9 +26,19 @@
     "request-promise-native": "^1.0.7"
   },
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "jest": "^24.9.0",
     "lambda-local": "^1.6.3",
     "webpack": "^4.39.3",
     "webpack-cli": "^3.3.7"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "plugins": [
+          "@babel/plugin-transform-modules-commonjs"
+        ]
+      }
+    }
   }
 }

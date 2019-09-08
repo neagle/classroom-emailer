@@ -1,11 +1,11 @@
-require("dotenv").config();
+import "dotenv/config";
 
-const rp = require("request-promise-native");
-const getServices = require("./getServices");
-const getNotifications = require("./getNotifications");
-const sendNotifications = require("./sendNotifications");
+import rp from "request-promise-native";
+import getServices from "./getServices";
+import getNotifications from "./getNotifications";
+import sendNotifications from "./sendNotifications";
 
-exports.handler = async function(event, context) {
+const handler = async function(event, context) {
   console.log("ENVIRONMENT VARIABLES\n" + JSON.stringify(process.env, null, 2));
   console.log("EVENT\n" + JSON.stringify(event, null, 2));
 
@@ -31,3 +31,5 @@ exports.handler = async function(event, context) {
 
   return context.logStreamName;
 };
+
+export { handler };

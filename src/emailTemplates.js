@@ -1,4 +1,4 @@
-const { format } = require("date-fns");
+import { format } from "date-fns";
 
 const dateFormat = "EEEE, MMMM do";
 
@@ -11,7 +11,7 @@ Nate & Chiara
 Signup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0
 `;
 
-module.exports = [
+const emailTemplates = [
   {
     // Friday laundry pick-up
     service: /^Friday/i,
@@ -61,3 +61,5 @@ Thank you! We couldn’t do it without you.
       ).trim()
   }
 ];
+
+export default emailTemplates;

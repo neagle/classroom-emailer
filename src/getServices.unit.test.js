@@ -1,5 +1,4 @@
-const util = require("util");
-const getServices = require("./getServices");
+import getServices from "./getServices";
 
 describe("correctly parses the sign-up tsv", () => {
   const tsv = `Please place your name in any open slot. If you are able, please choose a couple of slots in each category.
@@ -25,8 +24,6 @@ describe("correctly parses the sign-up tsv", () => {
   * Please note that some dates fall a day before or after due to a day off of school.`;
 
   const services = getServices(tsv);
-
-  // console.log(JSON.stringify(services));
 
   it("get the correct number of services", () => {
     expect(services.length).toBe(3);

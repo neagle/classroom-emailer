@@ -1,7 +1,6 @@
-const { differenceInDays, startOfDay } = require("date-fns");
-const { convertToTimeZone } = require("date-fns-timezone");
+import { differenceInDays, startOfDay } from "date-fns";
 
-module.exports = services => {
+const getNotifications = services => {
   const notifications = [];
 
   const today = process.env.date ? new Date(process.env.date) : new Date();
@@ -50,3 +49,5 @@ module.exports = services => {
   process.env.debug && console.log("NOTIFICATIONS", notifications);
   return notifications;
 };
+
+export default getNotifications;

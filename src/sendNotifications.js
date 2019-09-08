@@ -1,11 +1,11 @@
-const familyEmails = require("./familyEmails");
-const emailTemplates = require("./emailTemplates");
-const sendEmail = require("./sendEmail");
-const { format } = require("date-fns");
+import familyEmails from "./familyEmails";
+import emailTemplates from "./emailTemplates";
+import sendEmail from "./sendEmail";
+import { format } from "date-fns";
 
 const dateFormat = "EEEE, MMMM do";
 
-module.exports = notifications => {
+const sendNotifications = notifications => {
   notifications.forEach(notification => {
     const recipient = familyEmails.filter(family => {
       const re = new RegExp(`^${family.name}`, "i");
@@ -42,3 +42,5 @@ module.exports = notifications => {
     })
   );
 };
+
+export default sendNotifications;
