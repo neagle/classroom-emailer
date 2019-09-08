@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/neagle/classroom-emailer.svg?branch=master)](https://travis-ci.org/neagle/classroom-emailer)
-
 # Gingko Classroom Emailer
+
+[![Build Status](https://travis-ci.org/neagle/classroom-emailer.svg?branch=master)](https://travis-ci.org/neagle/classroom-emailer)
 
 The Gingko classroom at Lee Montessori has three weekly services provided by student families. This project parses the sign-up sheet in `tsv` form and sends reminder emails to the families who have signed up a few days beforehand.
 
