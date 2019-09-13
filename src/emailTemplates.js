@@ -7,6 +7,8 @@ Please check the volunteer notes for additional info: https://docs.google.com/do
 
 Gratefully,
 Nate & Chiara
+Gingko Class Room Parents at Lee Montessori
+--
 
 Signup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0
 `;
@@ -15,7 +17,7 @@ const emailTemplates = [
   {
     // Friday laundry pick-up
     service: /^Friday/i,
-    subject: "🧺 Laundry Reminder",
+    subject: "🧺 Gingko Laundry Reminder",
     text: serviceDate =>
       (
         `
@@ -31,7 +33,7 @@ Thank you! Doing the class’s laundry is a huge help.
   {
     // Wednesday home-made snack
     service: /^Wednesday/i,
-    subject: "🍌 Homemade Snack Reminder",
+    subject: "🍌 Gingko Homemade Snack Reminder",
     text: serviceDate =>
       (
         `
@@ -47,7 +49,7 @@ Thank you! We really appreciate your help.
   {
     // Monday drop off boquet of flowers and snacks
     service: /^Monday/i,
-    subject: "🌷🍌 Flowers and Snacks Reminder",
+    subject: "🌷🍌 Gingko Flowers and Snacks Reminder",
     text: serviceDate =>
       (
         `

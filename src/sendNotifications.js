@@ -29,7 +29,8 @@ const sendNotifications = notifications => {
       const message = emailTemplates.filter(template => {
         return template.service.test(notification.service);
       });
-      notification.subject = message[0].subject;
+
+      notification.subject = `${notification.family} ${message[0].subject}`;
       notification.text =
         message.length && message[0].text(notification.serviceDate);
     }
