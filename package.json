@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack --env=prod && zip -j function.zip .env build/index.js",
-    "upload": "aws lambda --profile gokibitz update-function-code --function-name gingko-emailer --zip-file fileb://function.zip",
+    "upload": "aws lambda --profile gokibitz update-function-code --function-name ginkgo-emailer --zip-file fileb://function.zip",
     "test": "jest",
     "test-watch": "jest --watchAll",
     "invoke": "lambda-local -l build/index.js -h handler -e debug-send-event.js",
