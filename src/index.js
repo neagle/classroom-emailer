@@ -25,7 +25,7 @@ const handler = async function(event, context) {
 
   await rp(URL)
     .then(getServices)
-    .then(getNotifications)
+    .then(services => getNotifications(services, event.recipients))
     .then(sendNotifications)
     .catch(err => console.log("ERROR", err));
 

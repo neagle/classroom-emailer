@@ -1,6 +1,13 @@
-import { differenceInDays, startOfDay } from "date-fns";
+import { differenceInDays, isEqual, startOfDay } from "date-fns";
 
-const getNotifications = services => {
+const getNotifications = (services, specifiedRecipients) => {
+  const recipients = {
+    families: false,
+    teachers: false,
+    ...specifiedRecipients
+  };
+  process.env.debug && console.log("RECIPIENTS", recipients);
+
   const notifications = [];
 
   const today = process.env.date ? new Date(process.env.date) : new Date();
@@ -29,17 +36,30 @@ const getNotifications = services => {
 
       const daysLeft = differenceInDays(serviceDate, today);
 
-      if (startOfDay(serviceDate) >= today) {
-        if (
-          (/friday/i.test(service) && daysLeft === 2) ||
-          (/wednesday/i.test(service) && daysLeft === 2) ||
-          (/monday/i.test(service) && daysLeft === 3) ||
-          (daysLeft === 5 && !family)
-        ) {
+      if (recipients.families) {
+        if (startOfDay(serviceDate) >= today) {
+          if (
+            (/friday/i.test(service) && daysLeft === 2) ||
+            (/wednesday/i.test(service) && daysLeft === 2) ||
+            (/monday/i.test(service) && daysLeft === 3) ||
+            (daysLeft === 5 && !family)
+          ) {
+            notifications.push({
+              serviceDate,
+              service,
+              family
+            });
+          }
+        }
+      }
+
+      if (recipients.teachers) {
+        if (isEqual(serviceDate, today)) {
           notifications.push({
             serviceDate,
             service,
-            family
+            family,
+            teachers: true
           });
         }
       }

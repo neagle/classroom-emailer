@@ -1,5 +1,6 @@
 import familyEmails from "./familyEmails";
-import emailTemplates from "./emailTemplates";
+import familyEmailTemplates from "./familyEmailTemplates";
+import teacherEmailTemplates from "./teacherEmailTemplates";
 import sendEmail from "./sendEmail";
 import { format } from "date-fns";
 
@@ -7,11 +8,17 @@ const dateFormat = "EEEE, MMMM do";
 
 const sendNotifications = notifications => {
   notifications.forEach(notification => {
-    const recipient = familyEmails.filter(family => {
-      const re = new RegExp(`^${family.name}`, "i");
+    let recipient;
 
-      return re.test(notification.family);
-    });
+    if (notification.teachers) {
+      recipient = familyEmails.filter(family => family.name === "teachers");
+    } else {
+      recipient = familyEmails.filter(family => {
+        const re = new RegExp(`^${family.name}`, "i");
+
+        return re.test(notification.family);
+      });
+    }
 
     notification.recipient = (recipient.length && recipient[0].emails) || [];
 
@@ -26,13 +33,23 @@ const sendNotifications = notifications => {
         dateFormat
       )}.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0`;
     } else {
-      const message = emailTemplates.filter(template => {
-        return template.service.test(notification.service);
-      });
+      if (notification.teachers) {
+        const message = teacherEmailTemplates.filter(template => {
+          return template.service.test(notification.service);
+        });
 
-      notification.subject = `${notification.family} ${message[0].subject}`;
-      notification.text =
-        message.length && message[0].text(notification.serviceDate);
+        notification.subject = `${message[0].subject} ${notification.family}`.trim();
+        notification.text =
+          message.length && message[0].text(notification.family);
+      } else {
+        const message = familyEmailTemplates.filter(template => {
+          return template.service.test(notification.service);
+        });
+
+        notification.subject = `${notification.family} ${message[0].subject}`;
+        notification.text =
+          message.length && message[0].text(notification.serviceDate);
+      }
     }
   });
 

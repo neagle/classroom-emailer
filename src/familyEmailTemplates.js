@@ -13,7 +13,7 @@ Ginkgo Class Room Parents at Lee Montessori
 Signup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0
 `;
 
-const emailTemplates = [
+const familyEmailTemplates = [
   {
     // Friday laundry pick-up
     service: /^Friday/i,
@@ -64,4 +64,4 @@ Thank you! We couldn’t do it without you.
   }
 ];
 
-export default emailTemplates;
+export default familyEmailTemplates;

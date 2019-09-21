@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import sendNotifications from "./sendNotifications";
-import emailTemplates from "./emailTemplates";
+import emailTemplates from "./familyEmailTemplates";
 
 const sendEmail = require("./sendEmail");
 jest.mock("./sendEmail");
@@ -35,7 +35,7 @@ it("should send a notification", () => {
   expect(sendEmail).toBeCalledTimes(1);
   expect(sendEmail).toHaveBeenCalledWith(
     family.emails.join(", "),
-    service.subject,
+    `${family.name} family ` + service.subject,
     service.text(serviceDate)
   );
 });

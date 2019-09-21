@@ -14,7 +14,7 @@ it("send notifications for Friday laundry pick-up two days before", () => {
     }
   ];
 
-  const notifications = getNotifications(services);
+  const notifications = getNotifications(services, { families: true });
 
   expect(notifications.length).toBe(1);
   expect(notifications[0].family).toBe("Eagle family");
@@ -29,7 +29,7 @@ it("send notifications for Wednesday snack two days before", () => {
     }
   ];
 
-  const notifications = getNotifications(services);
+  const notifications = getNotifications(services, { families: true });
 
   expect(notifications.length).toBe(1);
   expect(notifications[0].family).toBe("Eagle family");
@@ -43,7 +43,7 @@ it("should send notifications for Monday flowers + snack on the Friday before", 
   ];
 
   process.env.date = new Date("9/1/2019");
-  const notifications = getNotifications(services);
+  const notifications = getNotifications(services, { families: true });
 
   expect(notifications.length).toBe(1);
   expect(notifications[0].family).toBe("Eagle family");
@@ -58,7 +58,7 @@ it("should send a notification to the room parents if no one is signed up", () =
   ];
 
   process.env.date = new Date("9/1/2019");
-  const notifications = getNotifications(services);
+  const notifications = getNotifications(services, { families: true });
 
   // console.log(notifications);
 
