@@ -12,7 +12,9 @@ const teacherEmailTemplates = [
     text: familyName =>
       (
         `
-${familyName} is signed up to pick up laundry today.
+${
+  /[Ff]amily$/.test(familyName) ? "The " : " "
+}${familyName} is signed up to pick up laundry today.
 
 Happy Friday!
     ` + footer
@@ -25,7 +27,9 @@ Happy Friday!
     text: familyName =>
       (
         `
-${familyName} is signed up to bring today’s snack.
+${
+  /[Ff]amily$/.test(familyName) ? "The " : " "
+}${familyName} is signed up to bring today’s snack.
     ` + footer
       ).trim()
   },
@@ -36,7 +40,9 @@ ${familyName} is signed up to bring today’s snack.
     text: familyName =>
       (
         `
-${familyName} is signed up to bring in flowers and a snack today.
+${
+  /[Ff]amily/.test(familyName) ? "The " : " "
+}${familyName} is signed up to bring in flowers and a snack today.
     ` + footer
       ).trim()
   }

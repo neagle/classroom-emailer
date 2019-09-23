@@ -12,7 +12,7 @@ const getServices = tsv => {
 
             if (isDate.test(day)) {
               const family = row[i + 1];
-              return [day.trim(), family];
+              return [day.trim(), family.trim()];
             }
           })
           .filter(Boolean);

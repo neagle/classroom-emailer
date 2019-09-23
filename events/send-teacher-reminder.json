@@ -1,0 +1,8 @@
+{
+  "debug": false,
+  "sendToRealPeople": false,
+	"recipients": {
+		"families": false,
+		"teachers": true
+	}
+}
