@@ -23,7 +23,7 @@ Happy Friday!
   {
     // Wednesday home-made snack
     service: /^Wednesday/i,
-    subject: "🍌 Gingko Snack: ",
+    subject: "🍌 Ginkgo Snack: ",
     text: familyName =>
       (
         `
