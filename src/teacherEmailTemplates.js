@@ -1,7 +1,7 @@
 const footer = `
 --
 
-Signup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0
+Signup Sheet: https://docs.google.com/spreadsheets/d/${process.env.SPREADSHEET_KEY}
 `;
 
 const teacherEmailTemplates = [

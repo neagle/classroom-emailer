@@ -31,7 +31,7 @@ const sendNotifications = notifications => {
       } on ${format(
         notification.serviceDate,
         dateFormat
-      )}.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0`;
+      )}.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/${process.env.SPREADSHEET_KEY}`;
     } else {
       if (notification.teachers) {
         const message = teacherEmailTemplates.filter(template => {

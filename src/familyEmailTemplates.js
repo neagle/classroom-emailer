@@ -10,7 +10,7 @@ Nate & Chiara
 Ginkgo Class Room Parents at Lee Montessori
 --
 
-Signup Sheet: https://docs.google.com/spreadsheets/d/1Sv5O-SB_oYS_hcJcK64MUPTUUcucEydIQqPLIb2hAI0/edit#gid=0
+Signup Sheet: https://docs.google.com/spreadsheets/d/${process.env.SPREADSHEET_KEY}
 `;
 
 const familyEmailTemplates = [
