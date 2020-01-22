@@ -30,7 +30,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.6.0",
     "jest": "^24.9.0",
     "lambda-local": "^1.6.3",
-    "webpack": "^4.39.3",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.7"
   },
   "babel": {
