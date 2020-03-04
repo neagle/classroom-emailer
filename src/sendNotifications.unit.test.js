@@ -40,6 +40,31 @@ it("should send a notification", () => {
   );
 });
 
+it("should handle an array of names", () => {
+  // const sendEmail = jest.fn();
+  const family = mockedFamilyEmails[2];
+  const service = emailTemplates[2];
+
+  const serviceDate = new Date("2019-09-06T04:00:00.000Z");
+
+  const notifications = [
+    {
+      serviceDate: serviceDate,
+      service: "Monday Drop Off Bouquet of Flowers and snacks",
+      family: `${family.name} family`
+    }
+  ];
+
+  sendNotifications(notifications);
+
+  expect(sendEmail).toBeCalledTimes(1);
+  expect(sendEmail).toHaveBeenCalledWith(
+    family.emails.join(", "),
+    `${family.name} family ` + service.subject,
+    service.text(serviceDate)
+  );
+});
+
 it("should send multiple notifications", () => {
   // const sendEmail = jest.fn();
   const notifications = [

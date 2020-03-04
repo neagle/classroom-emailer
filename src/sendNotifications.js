@@ -14,16 +14,35 @@ const sendNotifications = notifications => {
       recipient = familyEmails.filter(family => family.name === "teachers");
     } else {
       recipient = familyEmails.filter(family => {
-        const re = new RegExp(`^${family.name}`, "i");
+        const familyNames = Array.isArray(family.name)
+          ? [...family.name]
+          : [family.name];
+        const familyNamesRegExps = familyNames.map(name =>
+          RegExp(`^${name}`, "i")
+        );
 
-        return re.test(notification.family);
+        return familyNamesRegExps.some(re => re.test(notification.family));
       });
     }
 
     notification.recipient = (recipient.length && recipient[0].emails) || [];
 
-    // If there are no recipients, no one has signed up: we need to send the message to the room parents
-    if (!notification.recipient.length) {
+    if (notification.family && !notification.recipient.length) {
+      // If there's a family signed up, but we don't have an email match for
+      // them, send a message to the admin
+      const { ADMIN = "" } = process.env;
+      notification.recipient = ADMIN.split(",");
+      notification.text = `Right now, ${
+        notification.family
+      } has signed up for ${notification.service} on ${format(
+        notification.serviceDate,
+        dateFormat
+      )}, but we don’t have an email match for them and can’t send them a reminder.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/${
+        process.env.SPREADSHEET_KEY
+      }`;
+    } else if (!notification.recipient.length) {
+      // If there are no recipients, no one has signed up: we need to send the
+      // message to the room parents
       const { ROOM_PARENTS = "" } = process.env;
       notification.recipient = ROOM_PARENTS.split(",");
       notification.text = `Right now, no one has signed up for ${
@@ -31,7 +50,9 @@ const sendNotifications = notifications => {
       } on ${format(
         notification.serviceDate,
         dateFormat
-      )}.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/${process.env.SPREADSHEET_KEY}`;
+      )}.\n\nSignup Sheet: https://docs.google.com/spreadsheets/d/${
+        process.env.SPREADSHEET_KEY
+      }`;
     } else {
       if (notification.teachers) {
         const message = teacherEmailTemplates.filter(template => {
